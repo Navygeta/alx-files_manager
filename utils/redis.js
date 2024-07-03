@@ -6,7 +6,7 @@ class RedisClient {
   constructor() {
     // Create a new Redis client
     this.client = createClient();
-    
+
     // Handle connection errors
     this.client.on('error', (error) => {
       console.log(`Redis client not connected to server: ${error}`);
@@ -21,7 +21,7 @@ class RedisClient {
   // Get a value from Redis for the given key
   async get(key) {
     const redisGet = promisify(this.client.get).bind(this.client);
-    return await redisGet(key);
+    return redisGet(key); // Removed unnecessary await
   }
 
   // Set a key-value pair in Redis with an optional expiration time (in seconds)
